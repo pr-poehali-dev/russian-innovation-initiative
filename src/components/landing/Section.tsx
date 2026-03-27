@@ -2,9 +2,22 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import type { SectionProps } from "@/types"
 
+const HERO_IMAGE = "https://cdn.poehali.dev/projects/7e7d6ec2-ff8f-40a7-9801-15cfe0fdc0dd/files/62696557-10e8-475c-855b-81fae079595c.jpg"
+
 export default function Section({ id, title, subtitle, content, isActive, showButton, buttonText }: SectionProps) {
   return (
     <section id={id} className="relative h-screen w-full snap-start flex flex-col justify-center p-8 md:p-16 lg:p-24">
+      {id === 'hero' && (
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(${HERO_IMAGE})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.18,
+          }}
+        />
+      )}
       {subtitle && (
         <motion.div
           className="mb-12"
