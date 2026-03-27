@@ -2,10 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import Section from './Section'
 import Layout from './Layout'
+import OrderModal from './OrderModal'
 import { sections } from './sections'
 
 export default function LandingPage() {
   const [activeSection, setActiveSection] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ container: containerRef })
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
@@ -67,9 +69,11 @@ export default function LandingPage() {
             key={section.id}
             {...section}
             isActive={index === activeSection}
+            onOrderClick={section.showButton ? () => setIsModalOpen(true) : undefined}
           />
         ))}
       </div>
+      <OrderModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </Layout>
   )
 }

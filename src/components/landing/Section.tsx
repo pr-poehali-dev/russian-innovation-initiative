@@ -4,7 +4,11 @@ import type { SectionProps } from "@/types"
 
 const HERO_IMAGE = "https://cdn.poehali.dev/projects/7e7d6ec2-ff8f-40a7-9801-15cfe0fdc0dd/files/62696557-10e8-475c-855b-81fae079595c.jpg"
 
-export default function Section({ id, title, subtitle, content, isActive, showButton, buttonText }: SectionProps) {
+interface SectionPropsExtended extends SectionProps {
+  onOrderClick?: () => void
+}
+
+export default function Section({ id, title, subtitle, content, isActive, showButton, buttonText, onOrderClick }: SectionPropsExtended) {
   return (
     <section id={id} className="relative h-screen w-full snap-start flex flex-col justify-center p-8 md:p-16 lg:p-24">
       {id === 'hero' && (
@@ -57,6 +61,7 @@ export default function Section({ id, title, subtitle, content, isActive, showBu
             variant="outline"
             size="lg"
             className="text-[#FF4D00] bg-transparent border-[#FF4D00] hover:bg-[#FF4D00] hover:text-black transition-colors"
+            onClick={onOrderClick}
           >
             {buttonText}
           </Button>
